@@ -27,12 +27,12 @@ describe("Feature Integration Tests", () => {
     // Reset database state before each test
   });
 
-  it("GET /api/feature returns 200", async () => {
+  it("GET /api/products returns 200", async () => {
     const response = await request(app).get("/api/products");
     expect(response.status).toBe(200);
   });
 
-  it("GET /api/feature returns 200", async () => {
+  it("GET /api/productByCode returns 200", async () => {
     const response = await request(app).get(
       "/api/products/product?code=0001.HK"
     );
