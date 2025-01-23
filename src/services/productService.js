@@ -35,7 +35,7 @@ class ProductService {
     return this.products;
   }
 
-  async getProductById(product_code) {
+  async getProductByCode(product_code) {
     logger.info(`Fetching product with code: ${product_code}`);
     const product = this.products.find(
       (product) => product.product_code === product_code

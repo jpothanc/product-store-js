@@ -12,3 +12,22 @@ Jest did not exit one second after the test run has completed.
 'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
 
 You need to seperate the server.js and app.js in to sepearte file
+
+Swagger
+npm install swagger-autogen swagger-ui-express
+
+to make it less verbos, 
+run npm src/swagger.js which generates swagger-output.json
+
+package.json generate this doc before restart
+"scripts": {
+    "start": "node src/swagger.js && node src/server.js",
+    "dev": "node src/swagger.js && nodemon src/server.js",
+   
+  },
+
+npm start 
+npm run dev for dev and auto detecting API changes
+
+
+

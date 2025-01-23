@@ -12,7 +12,7 @@ export const getProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const id = req.query.code;
-    const product = await productService.getProductById(id);
+    const product = await productService.getProductByCode(id);
     if (!product) {
       res.status(404).json({ message: "Product not found" });
       return;
