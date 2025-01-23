@@ -16,9 +16,10 @@ class ProductService {
     try {
       logger.info("Loading products from file...");
       const jsonPath = join(__dirname, "../data/hkse.json");
-      const rawData = readFileSync(jsonPath, "utf8");
+      const rawData = readFileSync(jsonPath);
       const hkseData = JSON.parse(rawData);
       this.products = hkseData;
+      console.log(this.products);
       logger.info(`${this.products.length} products loaded successfully`);
     } catch (error) {
       logger.error("Error loading products:", {

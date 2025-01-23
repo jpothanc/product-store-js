@@ -1,0 +1,14 @@
+npm install --save-dev @babel/core babel-jest
+
+These packages provide:
+jest: The testing framework
+supertest: For testing HTTP endpoints
+@babel/preset-env and @babel/core: For ES Modules support
+babel-jest: Babel integration with Jest
+After installing, you can run your integration tests with npm test as mentioned before.
+
+to fox this:
+Jest did not exit one second after the test run has completed.
+'This usually means that there are asynchronous operations that weren't stopped in your tests. Consider running Jest with `--detectOpenHandles` to troubleshoot this issue.
+
+You need to seperate the server.js and app.js in to sepearte file
