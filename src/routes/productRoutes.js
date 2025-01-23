@@ -4,7 +4,7 @@ const router = express.Router();
 // Import the controller
 import {
   getProducts,
-  getProductById as getProductByCode,
+  getProductByCode,
 } from "../controllers/productController.js";
 
 // Route to get all products
@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
   getProducts(req, res);
 });
 
-router.get("/product", (re, res) => {
+router.get("/product", (req, res) => {
   // #swagger.summary = "Get product by code"
   // #swagger.description = "Retrieve a product by its code."
   // #swagger.parameters['code'] = { description: "Product code" }

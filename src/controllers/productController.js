@@ -9,7 +9,7 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProductById = async (req, res) => {
+export const getProductByCode = async (req, res) => {
   try {
     const id = req.query.code;
     const product = await productService.getProductByCode(id);

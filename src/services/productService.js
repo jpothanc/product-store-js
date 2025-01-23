@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 class ProductService {
   constructor() {
-    this.products = [];
+    this.products = new Map();
     this.loadProducts();
   }
 
@@ -18,7 +18,12 @@ class ProductService {
       const jsonPath = join(__dirname, "../data/hkse.json");
       const rawData = readFileSync(jsonPath);
       const hkseData = JSON.parse(rawData);
-      this.products = hkseData;
+
+      for (const product of hkseData) {
+        product.product_code = product.product_code.trim();
+        this.products.set(product.product_code, product);
+      }
+
       console.log(this.products);
       logger.info(`${this.products.length} products loaded successfully`);
     } catch (error) {
@@ -32,14 +37,12 @@ class ProductService {
 
   async getProducts() {
     logger.info("Fetching all products");
-    return this.products;
+    return Array.from(this.products.values());
   }
 
   async getProductByCode(product_code) {
     logger.info(`Fetching product with code: ${product_code}`);
-    const product = this.products.find(
-      (product) => product.product_code === product_code
-    );
+    const product = this.products.get(product_code);
     if (!product) {
       logger.warn(`Product not found with code: ${product_code}`);
     }
