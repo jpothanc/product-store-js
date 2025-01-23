@@ -12,7 +12,19 @@ const doc = {
     description: "product-store api documentation",
   },
   host: `localhost:${port}`,
+  basePath: "/api/v1/products",
   schemes: ["http"],
+  securityDefinitions: {
+    basicAuth: {
+      type: "basic",
+    },
+  },
+  // this provides the Authorize button in the swagger UI
+  security: [
+    {
+      basicAuth: [],
+    },
+  ],
 };
 
 const outputFile = "./swagger-output.json"; // Output file for Swagger docs

@@ -1,5 +1,5 @@
 import express from "express";
-import productRoutes from "./routes/productRoutes.js";
+import { API_VERSIONS } from "./config/apiVersions.js";
 import { readFileSync } from "fs";
 import { join } from "path";
 import swaggerUi from "swagger-ui-express";
@@ -18,7 +18,9 @@ const swaggerDocument = JSON.parse(
 // Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Routes
-app.use("/api/products", productRoutes);
+// Register routes for each version
+Object.entries(API_VERSIONS).forEach(([version, config]) => {
+  app.use(`${config.prefix}/products`, config.routes);
+});
 
 export default app;

@@ -1,11 +1,15 @@
 import express from "express";
 const router = express.Router();
+import { authenticateRequest } from "../middleware/authMiddleware.js";
+
 
 // Import the controller
 import {
   getProducts,
   getProductByCode,
 } from "../controllers/productController.js";
+
+router.use(authenticateRequest);
 
 // Route to get all products
 router.get("/", (req, res) => {
