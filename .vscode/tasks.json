@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Docker Container",
+      "type": "shell",
+      "command": "docker start product-store",
+      "problemMatcher": []
+    },
+    {
+      "label": "Stop Docker Container",
+      "type": "shell",
+      "command": "docker stop product-store",
+      "problemMatcher": []
+    }
+  ]
+}
