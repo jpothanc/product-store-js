@@ -13,6 +13,10 @@ const test_product = {
   "30_day_average_volume": 2500000,
 };
 
+// Test credentials
+const validCredentials = Buffer.from("admin:admin").toString("base64");
+const invalidCredentials = Buffer.from("wrong:wrong123").toString("base64");
+
 describe("Feature Integration Tests", () => {
   beforeAll(async () => {
     server = app.listen(4000);
@@ -27,16 +31,34 @@ describe("Feature Integration Tests", () => {
     // Reset database state before each test
   });
 
-  it("GET /api/products returns 200", async () => {
-    const response = await request(app).get("/api/products");
-    expect(response.status).toBe(200);
+  describe("Authentication Tests", () => {
+    it("should reject requests without authentication", async () => {
+      const response = await request(app).get("/api/v1/products");
+      expect(response.status).toBe(401);
+    });
+
+    it("should reject requests with invalid credentials", async () => {
+      const response = await request(app)
+        .get("/api/v1/products")
+        .set("Authorization", `Basic ${invalidCredentials}`);
+      expect(response.status).toBe(401);
+    });
   });
 
-  it("GET /api/productByCode returns 200", async () => {
-    const response = await request(app).get(
-      "/api/products/product?code=0001.HK"
-    );
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual(test_product);
+  describe("API Endpoints with Authentication", () => {
+    it("GET /api/v1/products returns 200 with valid auth", async () => {
+      const response = await request(app)
+        .get("/api/v1/products")
+        .set("Authorization", `Basic ${validCredentials}`);
+      expect(response.status).toBe(200);
+    });
+
+    it("GET /api/v1/products/product returns 200 with valid auth", async () => {
+      const response = await request(app)
+        .get("/api/v1/products/product?code=0001.HK")
+        .set("Authorization", `Basic ${validCredentials}`);
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(test_product);
+    });
   });
 });
