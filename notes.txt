@@ -36,3 +36,6 @@ curl -X GET "http://localhost:3002/api/v1/products/product?code=0002.HK" -H "Aut
 
 
 
+tests
+npm test
+npm coverage
