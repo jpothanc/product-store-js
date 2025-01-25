@@ -44,8 +44,11 @@ Docker
 # Build the Docker image
 docker build -t product-store .
 
+docker build -t kaljessy/productstorejs:latest .
+
+
 # Run the container
-docker run --env-file .env -p 3000:3002 productstorejs:latest
+docker run --env-file .env -p 3000:3002  kaljessy/productstorejs:latest
 docker ps 
 docker stop <ID>
 
@@ -56,3 +59,16 @@ docker run --env-file .env -p 3000:3002 productstorejs:latest
 3000 - docker port
 3002-container port on which the client runs
 curl -X GET "http://localhost:3000/api/v1/products/product?code=0002.HK" -u admin:admin
+
+Push
+docker login
+
+docker push kaljessy/productstorejs:latest
+
+docker images
+
+docker pull kaljessy/productstorejs:latest
+docker run --env-file .env -p 3000:3002 productstorejs:latest
+
+Remove:
+docker rmi kaljessy/productstorejs:latest
