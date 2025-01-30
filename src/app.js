@@ -1,7 +1,6 @@
 import express from "express";
 import { API_VERSIONS } from "./config/apiVersions.js";
 import { readFileSync } from "fs";
-import { join } from "path";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
 
@@ -13,7 +12,7 @@ app.use(express.json());
 
 // Load Swagger JSON
 const swaggerDocument = JSON.parse(
-  readFileSync("./src/swagger-output.json", "utf8")
+  readFileSync("./swagger-output.json", "utf8")
 );
 // Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));

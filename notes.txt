@@ -31,9 +31,11 @@ npm run dev for dev and auto detecting API changes
 
 
 Auth
-curl -X GET "http://localhost:3002/api/v1/products/product?code=0002.HK" -u admin:password123
+curl -X GET "http://localhost:3002/api/v1/products/product?code=0002.HK" -u admin:admin
 curl -X GET "http://localhost:3002/api/v1/products/product?code=0002.HK" -H "Authorization: Basic YWRtaW46cGFzc3dvcmQxMjM="
 
+
+curl -X GET "http://20.2.153.240:3002/api/v1/products/product?code=0002.HK" -u admin:admin
 
 
 tests
@@ -43,8 +45,6 @@ npm coverage
 Docker
 # Build the Docker image
 docker build -t product-store .
-
-docker build -t kaljessy/productstorejs:latest .
 
 
 # Run the container
@@ -72,3 +72,19 @@ docker run --env-file .env -p 3000:3002 productstorejs:latest
 
 Remove:
 docker rmi kaljessy/productstorejs:latest
+
+
+Building for production
+- Using esbuild
+needs these packages
+"esbuild": "^0.24.2",
+"esbuild-node-externals": "^1.16.0",
+"esbuild-plugin-copy": "^2.1.1",
+
+Create build.js
+as we are using esmodules we will have to externalize "path", "fs", "url", "os" in esbuild build file 
+in packaje.json, under scripts add these
+ "scripts": {
+    "build": "node build.js",
+
+  

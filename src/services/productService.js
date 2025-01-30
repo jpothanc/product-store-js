@@ -14,8 +14,9 @@ class ProductService {
 
   loadProducts() {
     try {
+      const filePath = process.env.PRODUCT_DATA || "../../data/products.json";
       logger.info("Loading products from file...");
-      const jsonPath = join(__dirname, "../data/hkse.json");
+      const jsonPath = join(filePath);
       const rawData = readFileSync(jsonPath);
       const hkseData = JSON.parse(rawData);
 

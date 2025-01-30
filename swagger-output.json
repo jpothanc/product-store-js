@@ -18,8 +18,7 @@
   "paths": {
     "/": {
       "get": {
-        "summary": "Get all products",
-        "description": "Retrieve a list of all products.",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -42,8 +41,7 @@
     },
     "/product": {
       "get": {
-        "summary": "Get product by code",
-        "description": "Retrieve a product by its code.",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -52,7 +50,6 @@
           },
           {
             "name": "code",
-            "description": "Product code",
             "in": "query",
             "type": "string"
           }
